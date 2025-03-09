@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-flask-backend
+  namespace: app-2025  # Ensure this matches the namespace from the Deployment
+  annotations:
+    alb.ingress.kubernetes.io/healthcheck-path: "/contents/aws"
+spec:
+  selector:
+    app: demo-flask-backend  # Ensure this matches the label in the Deployment
+  type: NodePort  # You might change this to LoadBalancer if using ALB with AWS
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP

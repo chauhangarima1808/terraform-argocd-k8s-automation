@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-frontend
+  namespace: app-2025  # Ensure it is in the same namespace as other resources
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: frontend-fargate  # Ensure this matches the label for pod selection
+  template:
+    metadata:
+      labels:
+        app: frontend-fargate  # Ensure this matches the selector label for proper association
+    spec:
+      containers:
+        - name: demo-frontend
+          image: 135808912790.dkr.ecr.us-east-2.amazonaws.com/demo-frontend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+      tolerations:
+        - effect: NoSchedule
+          key: eks.amazonaws.com/compute-type
+          value: fargate  # Ensure that pods are scheduled on Fargate

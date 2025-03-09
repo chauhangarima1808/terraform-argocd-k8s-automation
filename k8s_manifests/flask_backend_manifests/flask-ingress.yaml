@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: flask-backend-ingress
+  namespace: app-2025  # Ensure this matches the namespace in the Deployment and Service
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/group.name: eks-demo-group
+    alb.ingress.kubernetes.io/group.order: '1'
+spec:
+  ingressClassName: alb  # Ensures the use of AWS ALB Ingress Controller
+  rules:
+    - http:
+        paths:
+          - path: /contents
+            pathType: Prefix
+            backend:
+              service:
+                name: demo-flask-backend  # The Service name must match the one in the Service.yaml
+                port:
+                  number: 8080  # Ensure this matches the Service port
