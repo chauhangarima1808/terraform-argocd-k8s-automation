@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: demo-frontend
-  namespace: default
+  namespace: app-2025
   labels:
     env: dev
 spec:
