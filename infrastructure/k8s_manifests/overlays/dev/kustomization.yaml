@@ -4,7 +4,7 @@ namespace: app-2025
 images:
 - name: 135808912790.dkr.ecr.us-east-2.amazonaws.com/demo-frontend
   newName: 135808912790.dkr.ecr.us-east-2.amazonaws.com/demo-frontend
-  newTag: d436c0c5
+  newTag: latest
 resources:
 - ../../base
 patchesStrategicMerge:
